@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useData, Lead } from '../context/DataContext';
-import { scriptTemplates } from '../utils/scriptTemplates';
 import { generateHeygenScript } from '../utils/heygenTemplates';
 
 type ContentFormat = 'ai-script' | 'podcast';
