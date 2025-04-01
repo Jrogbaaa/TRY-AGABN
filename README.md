@@ -1,4 +1,4 @@
-# Lead Data Analyzer with Heygen Integration
+# Lead Data Analyzer (TRY-AGABN Project)
 
 A comprehensive tool for ingesting, analyzing, and deriving insights from lead data, with a script generation feature for Heygen AI video creation.
 
@@ -31,7 +31,7 @@ A comprehensive tool for ingesting, analyzing, and deriving insights from lead d
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/lead-analyzer.git
+   git clone https://github.com/Jrogbaaa/TRY-AGABN.git
    cd lead-analyzer
    ```
 
