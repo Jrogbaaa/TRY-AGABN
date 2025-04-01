@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
 import { DataProvider } from './context/DataContext'
 import Dashboard from './pages/Dashboard'
 import DataInput from './pages/DataInput'
 import ScriptOutput from './pages/ScriptOutput'
+import HeygenIntegration from './pages/HeygenIntegration'
 import './custom.css'
 
 // Navigation item type
@@ -16,7 +17,13 @@ interface NavItem {
 // Layout component for all pages
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const location = useLocation()
+  
+  // Check initial dark mode state
+  useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains('dark'))
+  }, [])
   
   // Navigation items with icons
   const navigation: NavItem[] = [
@@ -46,12 +53,22 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
         </svg>
       )
+    },
+    {
+      name: 'Heygen Integration',
+      href: '/heygen-integration',
+      icon: (active) => (
+        <svg className={`w-6 h-6 ${active ? 'text-blue-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+      )
     }
   ]
 
   // Toggle dark mode function
   const toggleDarkMode = () => {
     document.documentElement.classList.toggle('dark')
+    setIsDarkMode(!isDarkMode)
   }
   
   // Check if nav item is active
@@ -76,7 +93,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 pt-5">
           <div className="flex flex-shrink-0 items-center px-4 mb-2">
-            <img src="/logo.png" alt="Lead Analyzer" className="h-10 w-auto" />
+            {isDarkMode ? (
+              <img src="/logo-light.svg" alt="Lead Analyzer" className="h-10 w-auto" />
+            ) : (
+              <img src="/logo.png" alt="Lead Analyzer" className="h-10 w-auto" />
+            )}
           </div>
           <div className="mt-3 flex flex-grow flex-col">
             <nav className="flex-1 space-y-1 px-2">
@@ -123,7 +144,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-white dark:bg-gray-800 shadow-lg transform transition">
           <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center">
-              <img src="/logo.png" alt="Lead Analyzer" className="h-8 w-auto" />
+              {isDarkMode ? (
+                <img src="/logo-light.svg" alt="Lead Analyzer" className="h-8 w-auto" />
+              ) : (
+                <img src="/logo.png" alt="Lead Analyzer" className="h-8 w-auto" />
+              )}
             </div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -178,7 +203,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Mobile top bar */}
       <div className="lg:hidden border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-between h-16 px-4">
         <div className="flex items-center">
-          <img src="/logo.png" alt="Lead Analyzer" className="h-8 w-auto" />
+          {isDarkMode ? (
+            <img src="/logo-light.svg" alt="Lead Analyzer" className="h-8 w-auto" />
+          ) : (
+            <img src="/logo.png" alt="Lead Analyzer" className="h-8 w-auto" />
+          )}
         </div>
         <button
           onClick={() => setIsMobileMenuOpen(true)}
@@ -210,6 +239,7 @@ function App() {
           <Route path="/" element={<Layout><Dashboard /></Layout>} />
           <Route path="/data-input" element={<Layout><DataInput /></Layout>} />
           <Route path="/script-output" element={<Layout><ScriptOutput /></Layout>} />
+          <Route path="/heygen-integration" element={<Layout><HeygenIntegration /></Layout>} />
         </Routes>
       </Router>
     </DataProvider>

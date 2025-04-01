@@ -8,7 +8,7 @@ A comprehensive tool for ingesting, analyzing, and deriving insights from lead d
 - **Data Analysis**: Statistical analysis of lead quality, conversion rates, and engagement metrics
 - **Visual Insights**: Rich visualizations showing lead sources, conversion timelines, and engagement patterns
 - **Script Generation**: Create personalized scripts for Heygen based on lead analysis
-- **Heygen Integration**: Easy-to-follow integration with Heygen AI video platform
+- **Heygen Integration**: Direct integration with Heygen AI video platform for content creation
 - **Responsive Design**: Works seamlessly on both desktop and mobile devices
 
 ## Technology Stack
@@ -100,15 +100,44 @@ The site will automatically redeploy when changes are pushed to the main branch.
 
 ## Heygen Integration
 
-[Heygen](https://www.heygen.com/) is an AI-powered video generation platform. The Lead Analyzer can generate scripts that you can use with Heygen to create personalized outreach videos based on your lead data.
+[Heygen](https://www.heygen.com/) is an AI-powered video generation platform. The Lead Analyzer integrates with Heygen to help you create personalized outreach videos based on your lead data.
+
+### API Configuration
+
+The application comes with an API key pre-configured for connecting to the Heygen platform:
+```
+HEYGEN_API_KEY=MTAwYzgyZGNlMmE5NGZjNjk2MTIzZmRiMzhmYWUxODItMTczMzE0MDU4Nw==
+```
+
+### Using the Heygen Integration Tab
+
+1. Navigate to the "Heygen Integration" tab in the application
+2. Choose between two content formats:
+   - **AI-Recommended Script**: Generate a professional, data-driven script personalized for a specific lead or for general lead insights
+   - **Podcast Format**: Create a conversational podcast script discussing lead generation strategies with insights from your data
+3. Customize your content settings:
+   - For AI scripts: Select a lead name for personalization (optional)
+   - For Podcast format: Specify topic and duration
+4. Copy the generated content using the Copy button
+5. Paste the script into Heygen's script editor to create your video
+
+### Script & Podcast Features
+
+- **AI Scripts**: Professional, data-driven scripts that highlight key insights from your lead data
+- **Podcast Format**: Creates a host/guest conversation with segments based on your lead analysis
+- **Personalization**: Option to customize content for specific leads
+- **Production Notes**: Helpful formatting for Heygen video creation
+
+### Creating Videos in Heygen
 
 To use the generated scripts with Heygen:
 
-1. Generate a script using one of the available templates
+1. Generate a script using one of the available formats
 2. Copy the script using the copy button
-3. Paste the script into Heygen's script editor
-4. Select an avatar and customize voice settings
-5. Generate and download your video
+3. Visit [Heygen Studio](https://www.heygen.com/studio) and create a new project
+4. Paste the script into Heygen's script editor
+5. Select an avatar and customize voice settings
+6. Generate and download your video
 
 ## License
 
@@ -120,3 +149,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Tailwind CSS for the utility-first CSS framework
 - Vite.js for the blazing fast build tool
 - Netlify for reliable hosting
+- Heygen for the AI video generation platform

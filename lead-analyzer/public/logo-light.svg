@@ -1,0 +1,10 @@
+<svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <!-- Lead Analyzer Light Logo (Light version for dark mode) -->
+    <path d="M20.5 10h-10C9.12 10 8 11.12 8 12.5v23C8 36.88 9.12 38 10.5 38h10c8.28 0 15-6.72 15-15s-6.72-13-15-13z" fill="#4B9CFF"/>
+    <path d="M20.5 15h-7v18h7c5.52 0 10-4.48 10-9s-4.48-9-10-9z" fill="#ffffff"/>
+    
+    <!-- Text -->
+    <text x="55" y="30" font-family="Arial, sans-serif" font-weight="bold" font-size="18" fill="#ffffff">Lead Analyzer</text>
+  </g>
+</svg> 
