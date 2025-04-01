@@ -38,6 +38,11 @@
   }
 }
 
+/* Dark mode logo styles */
+.dark img[src="/logo.png"] {
+  filter: brightness(0) invert(1);
+}
+
 /* Smooth transitions */
 .transition-all {
   transition-property: all;

@@ -10,6 +10,7 @@ A comprehensive tool for ingesting, analyzing, and deriving insights from lead d
 - **Script Generation**: Create personalized scripts for Heygen based on lead analysis
 - **Heygen Integration**: Direct integration with Heygen AI video platform for content creation
 - **Responsive Design**: Works seamlessly on both desktop and mobile devices
+- **Dark Mode Support**: Full dark mode with optimized UI elements including logo visibility
 
 ## Technology Stack
 
@@ -97,6 +98,17 @@ This application is configured for Netlify deployment:
 4. Click "Deploy site"
 
 The site will automatically redeploy when changes are pushed to the main branch.
+
+## UI Customization
+
+### Dark Mode
+
+The application supports both light and dark modes, which can be toggled using the button in the bottom-left corner of the navigation menu. When in dark mode:
+
+- The interface switches to a darker color palette
+- The logo automatically changes to a light version via CSS filters
+- Charts and visualizations adapt for better visibility
+- All UI elements maintain accessibility standards in both modes
 
 ## Heygen Integration
 
