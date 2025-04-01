@@ -28,6 +28,9 @@ interface DataAnalysisResult {
   recentLeadsCount: number;
   topSource: string;
   leadsByStatus: Record<string, number>;
+  highValueLeads: Lead[];
+  leadScoreDistribution: { range: string; count: number }[];
+  leadsByScore: Lead[];
 }
 
 export const useDataAnalysis = (leads: Lead[]): DataAnalysisResult => {
@@ -46,7 +49,10 @@ export const useDataAnalysis = (leads: Lead[]): DataAnalysisResult => {
         conversionRate: 0,
         recentLeadsCount: 0,
         topSource: '',
-        leadsByStatus: {}
+        leadsByStatus: {},
+        highValueLeads: [],
+        leadScoreDistribution: [],
+        leadsByScore: []
       };
     }
 
@@ -91,6 +97,46 @@ export const useDataAnalysis = (leads: Lead[]): DataAnalysisResult => {
       leadsByStatus[lead.status] = (leadsByStatus[lead.status] || 0) + 1;
     });
 
+    // Get high-value leads (leads with scores > 80 or top 10% if no scores available)
+    const scoredLeads = leads.filter(lead => lead.score !== undefined);
+    let highValueLeads: Lead[] = [];
+    
+    if (scoredLeads.length > 0) {
+      // If we have scored leads, get the ones with high scores
+      highValueLeads = scoredLeads
+        .filter(lead => (lead.score || 0) > 80)
+        .sort((a, b) => (b.score || 0) - (a.score || 0));
+    } else {
+      // Otherwise, use the top 10% by estimated value as high-value leads
+      const sortedByValue = [...leads].sort((a, b) => b.estimatedValue - a.estimatedValue);
+      const topCount = Math.max(1, Math.ceil(leads.length * 0.1));
+      highValueLeads = sortedByValue.slice(0, topCount);
+    }
+    
+    // Generate lead score distribution
+    const scoreRanges = [
+      { min: 0, max: 20, label: '0-20' },
+      { min: 21, max: 40, label: '21-40' },
+      { min: 41, max: 60, label: '41-60' },
+      { min: 61, max: 80, label: '61-80' },
+      { min: 81, max: 100, label: '81-100' }
+    ];
+    
+    const leadScoreDistribution = scoreRanges.map(range => {
+      const count = scoredLeads.filter(
+        lead => (lead.score || 0) >= range.min && (lead.score || 0) <= range.max
+      ).length;
+      
+      return {
+        range: range.label,
+        count
+      };
+    });
+    
+    // Sort leads by score (highest to lowest)
+    const leadsByScore = [...leads]
+      .sort((a, b) => (b.score || 0) - (a.score || 0));
+
     return {
       insights,
       sourceBreakdown,
@@ -103,7 +149,10 @@ export const useDataAnalysis = (leads: Lead[]): DataAnalysisResult => {
       conversionRate,
       recentLeadsCount,
       topSource,
-      leadsByStatus
+      leadsByStatus,
+      highValueLeads,
+      leadScoreDistribution,
+      leadsByScore
     };
   }, [leads]);
 }; 

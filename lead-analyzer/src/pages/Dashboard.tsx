@@ -1,17 +1,28 @@
+import { useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import InsightsPanel from '../components/InsightsPanel';
 import LeadsBySource from '../components/visualizations/LeadsBySource';
 import ConversionTimeline from '../components/visualizations/ConversionTimeline';
 import EngagementMetrics from '../components/visualizations/EngagementMetrics';
+import LeadScoring from '../components/LeadScoring';
+import OptimalOutreachTiming from '../components/OptimalOutreachTiming';
+import OutreachTemplates from '../components/OutreachTemplates';
 import { useDataAnalysis } from '../hooks/useDataAnalysis';
 
 const Dashboard = () => {
-  const { leads, isLoading, error } = useData();
+  const { leads, isLoading, error, calculateLeadScores } = useData();
   const { 
     sourceBreakdown, 
     conversionTimeline, 
     engagementMetrics,
   } = useDataAnalysis(leads);
+
+  // Calculate lead scores on dashboard load
+  useEffect(() => {
+    if (leads && leads.length > 0) {
+      calculateLeadScores();
+    }
+  }, [leads]);
 
   // Loading state
   if (isLoading) {
@@ -87,6 +98,9 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Lead Scoring */}
+      <LeadScoring />
+
       {/* Insights Panel */}
       <InsightsPanel leads={leads} />
 
@@ -97,6 +111,12 @@ const Dashboard = () => {
       </div>
 
       <EngagementMetrics data={engagementMetrics} />
+
+      {/* Optimal Outreach Timing */}
+      <OptimalOutreachTiming />
+
+      {/* Outreach Templates */}
+      <OutreachTemplates />
     </div>
   );
 };

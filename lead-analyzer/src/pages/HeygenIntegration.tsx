@@ -4,8 +4,6 @@ import HeygenScriptGenerator from '../components/HeygenScriptGenerator';
 
 const HeygenIntegration = () => {
   const { leads } = useData();
-  const [apiKeyVisible, setApiKeyVisible] = useState(false);
-  const apiKey = "MTAwYzgyZGNlMmE5NGZjNjk2MTIzZmRiMzhmYWUxODItMTczMzE0MDU4Nw==";
 
   return (
     <div className="space-y-6">
@@ -21,59 +19,50 @@ const HeygenIntegration = () => {
         )}
       </div>
 
-      {/* API Key Section */}
+      {/* Heygen Tools Links Section */}
       <div className="card p-6">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Heygen API Configuration</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Heygen Tools</h2>
         
-        <div className="flex items-center space-x-3 mb-6">
-          <div className="flex-grow">
-            <label htmlFor="api-key" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              API Key
-            </label>
-            <div className="mt-1 flex rounded-md shadow-sm">
-              <input
-                type={apiKeyVisible ? "text" : "password"}
-                id="api-key"
-                value={apiKey}
-                readOnly
-                className="focus:ring-blue-500 focus:border-blue-500 flex-grow block w-full min-w-0 rounded-l-md sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
-                aria-label="Heygen API Key"
-              />
-              <button
-                type="button"
-                onClick={() => setApiKeyVisible(!apiKeyVisible)}
-                className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-md bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-300 sm:text-sm"
-                aria-label={apiKeyVisible ? "Hide API key" : "Show API key"}
-                tabIndex={0}
-              >
-                {apiKeyVisible ? (
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
-                  </svg>
-                ) : (
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                  </svg>
-                )}
-              </button>
-            </div>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              This API key is used to connect with the Heygen platform.
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a 
+            href="https://labs.heygen.com/video-podcast" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:from-opacity-30 dark:to-indigo-900 dark:to-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800 hover:shadow-md transition-shadow"
+            aria-label="Open HeyGen's AI podcast creation tool"
+            tabIndex={0}
+          >
+            <svg className="h-16 w-16 text-blue-600 dark:text-blue-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">AI Podcast Creation</h3>
+            <p className="text-center text-gray-600 dark:text-gray-300 text-sm mb-4">
+              Create professional AI-powered podcasts with natural-sounding conversations between multiple hosts
             </p>
-          </div>
-          <div>
-            <a
-              href="https://www.heygen.com/settings/api"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              aria-label="Manage API keys on Heygen"
-              tabIndex={0}
-            >
-              Manage Keys
-            </a>
-          </div>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+              labs.heygen.com/video-podcast
+            </span>
+          </a>
+          
+          <a 
+            href="https://www.heygen.com/studio" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-6 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900 dark:from-opacity-30 dark:to-pink-900 dark:to-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800 hover:shadow-md transition-shadow"
+            aria-label="Open HeyGen Studio"
+            tabIndex={0}
+          >
+            <svg className="h-16 w-16 text-purple-600 dark:text-purple-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Heygen Studio</h3>
+            <p className="text-center text-gray-600 dark:text-gray-300 text-sm mb-4">
+              Create personalized videos with AI avatars using scripts generated from your lead data
+            </p>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              heygen.com/studio
+            </span>
+          </a>
         </div>
       </div>
 
@@ -113,18 +102,18 @@ const HeygenIntegration = () => {
               <h3 className="text-lg font-semibold mt-6 mb-3">Integration Steps</h3>
               
               <ol className="list-decimal pl-6 space-y-2">
-                <li>Select a format above (AI-recommended script or Podcast format)</li>
-                <li>Customize your script and content as needed</li>
+                <li>Select a podcast format for your content</li>
+                <li>Customize your script content as needed</li>
                 <li>Copy the generated content using the copy button</li>
-                <li>Visit <a href="https://www.heygen.com/studio" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Heygen Studio</a> and create a new project</li>
+                <li>Visit <a href="https://labs.heygen.com/video-podcast" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">HeyGen Video Podcast</a> or <a href="https://www.heygen.com/studio" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Heygen Studio</a></li>
                 <li>Paste your script into Heygen's script editor</li>
-                <li>Select your preferred avatar and customize settings</li>
-                <li>Generate and download your lead engagement video</li>
+                <li>Select your preferred avatars and customize settings</li>
+                <li>Generate and download your lead engagement video or podcast</li>
               </ol>
               
               <div className="mt-6 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 p-4 rounded-md">
                 <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                  <strong>Pro Tip:</strong> For best results, review and edit the AI-generated script to ensure it matches your brand voice and tone before creating your video.
+                  <strong>Pro Tip:</strong> For the most engaging podcast-style content, create a dynamic conversation between two hosts discussing insights from your lead data and presenting solutions to common pain points.
                 </p>
               </div>
             </div>

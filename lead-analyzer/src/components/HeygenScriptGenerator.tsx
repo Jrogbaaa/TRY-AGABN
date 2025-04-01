@@ -2,22 +2,16 @@ import { useState, useCallback, useEffect } from 'react';
 import { useData, Lead } from '../context/DataContext';
 import { generateHeygenScript } from '../utils/heygenTemplates';
 
-type ContentFormat = 'ai-script' | 'podcast';
+type PodcastFormat = 'interview' | 'discussion' | 'debate';
 
 const HeygenScriptGenerator = () => {
   const { leads } = useData();
-  const [format, setFormat] = useState<ContentFormat>('ai-script');
-  const [leadName, setLeadName] = useState('');
+  const [format, setFormat] = useState<PodcastFormat>('discussion');
   const [generatedContent, setGeneratedContent] = useState('');
   const [isCopied, setIsCopied] = useState(false);
-  const [availableLeads, setAvailableLeads] = useState<Lead[]>([]);
   const [podcastTopic, setPodcastTopic] = useState('lead generation strategies');
   const [podcastDuration, setPodcastDuration] = useState(15);
-
-  // Update available leads for personalization
-  useEffect(() => {
-    setAvailableLeads(leads);
-  }, [leads]);
+  const [hostCount, setHostCount] = useState(2);
 
   // Generate initial content when component mounts
   useEffect(() => {
@@ -31,19 +25,16 @@ const HeygenScriptGenerator = () => {
       return;
     }
 
-    if (format === 'ai-script') {
-      const content = generateHeygenScript(leads, leadName, 'ai-script');
-      setGeneratedContent(content);
-    } else {
-      const content = generateHeygenScript(leads, leadName, 'podcast', {
-        topic: podcastTopic,
-        duration: podcastDuration
-      });
-      setGeneratedContent(content);
-    }
-
+    const content = generateHeygenScript(leads, '', 'podcast', {
+      topic: podcastTopic,
+      duration: podcastDuration,
+      format: format,
+      hostCount: hostCount
+    });
+    
+    setGeneratedContent(content);
     setIsCopied(false);
-  }, [leads, format, leadName, podcastTopic, podcastDuration]);
+  }, [leads, format, podcastTopic, podcastDuration, hostCount]);
 
   // Copy the generated content to clipboard
   const copyToClipboard = useCallback(async () => {
@@ -67,132 +58,88 @@ const HeygenScriptGenerator = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Heygen Content Generator</h2>
+      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Podcast Script Generator</h2>
       
       {/* Format Selection */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Select Content Format
+          Select Podcast Format
         </label>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <button
-            onClick={() => setFormat('ai-script')}
+            onClick={() => setFormat('interview')}
             className={`px-4 py-3 rounded-md text-sm font-medium text-left ${
-              format === 'ai-script'
+              format === 'interview'
                 ? 'bg-blue-100 dark:bg-blue-900 border-2 border-blue-500 dark:border-blue-700'
                 : 'bg-gray-100 dark:bg-gray-700 border-2 border-transparent'
             }`}
-            aria-label="Select AI-recommended script format"
+            aria-label="Select interview podcast format"
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && setFormat('ai-script')}
+            onKeyDown={(e) => e.key === 'Enter' && setFormat('interview')}
           >
-            <div className="font-semibold mb-1">AI-Recommended Script</div>
+            <div className="font-semibold mb-1">Interview Style</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
-              Generate a professionally crafted script based on lead analysis
+              One host interviews an expert about lead data insights
             </div>
           </button>
           
           <button
-            onClick={() => setFormat('podcast')}
+            onClick={() => setFormat('discussion')}
             className={`px-4 py-3 rounded-md text-sm font-medium text-left ${
-              format === 'podcast'
+              format === 'discussion'
                 ? 'bg-blue-100 dark:bg-blue-900 border-2 border-blue-500 dark:border-blue-700'
                 : 'bg-gray-100 dark:bg-gray-700 border-2 border-transparent'
             }`}
-            aria-label="Select podcast format"
+            aria-label="Select discussion podcast format"
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && setFormat('podcast')}
+            onKeyDown={(e) => e.key === 'Enter' && setFormat('discussion')}
           >
-            <div className="font-semibold mb-1">Podcast Format</div>
+            <div className="font-semibold mb-1">Discussion Format</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
-              Create a conversational podcast script with insights from lead data
+              Multiple hosts discuss lead insights and strategies
+            </div>
+          </button>
+          
+          <button
+            onClick={() => setFormat('debate')}
+            className={`px-4 py-3 rounded-md text-sm font-medium text-left ${
+              format === 'debate'
+                ? 'bg-blue-100 dark:bg-blue-900 border-2 border-blue-500 dark:border-blue-700'
+                : 'bg-gray-100 dark:bg-gray-700 border-2 border-transparent'
+            }`}
+            aria-label="Select debate podcast format"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setFormat('debate')}
+          >
+            <div className="font-semibold mb-1">Debate Format</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Hosts present contrasting views on lead generation approaches
             </div>
           </button>
         </div>
       </div>
       
-      {/* Script Settings */}
-      {format === 'ai-script' && (
-        <div className="mb-6">
+      {/* Podcast Settings */}
+      <div className="mb-6 space-y-4">
+        <div>
           <label 
-            htmlFor="lead-name"
+            htmlFor="podcast-topic"
             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
           >
-            Lead Name for Personalization
+            Podcast Topic
           </label>
-          <div className="mt-1 flex rounded-md shadow-sm">
-            <input
-              type="text"
-              id="lead-name"
-              name="lead-name"
-              value={leadName}
-              onChange={(e) => setLeadName(e.target.value)}
-              className="focus:ring-blue-500 focus:border-blue-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
-              placeholder="Enter lead name..."
-              aria-label="Enter lead name for personalized script"
-            />
-            <button
-              type="button"
-              onClick={generateNewContent}
-              className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              aria-label="Generate content"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && generateNewContent()}
-            >
-              Update
-            </button>
-          </div>
-          {availableLeads.length > 0 && (
-            <div className="mt-2">
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
-                Available Leads:
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {availableLeads.slice(0, 5).map((lead) => (
-                  <button
-                    key={lead.id}
-                    type="button"
-                    onClick={() => setLeadName(lead.name)}
-                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-800"
-                    aria-label={`Select ${lead.name}`}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && setLeadName(lead.name)}
-                  >
-                    {lead.name}
-                  </button>
-                ))}
-                {availableLeads.length > 5 && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                    +{availableLeads.length - 5} more
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
+          <input
+            type="text"
+            id="podcast-topic"
+            value={podcastTopic}
+            onChange={(e) => setPodcastTopic(e.target.value)}
+            className="focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
+            placeholder="e.g., lead generation strategies"
+            aria-label="Podcast topic"
+          />
         </div>
-      )}
-      
-      {/* Podcast Settings */}
-      {format === 'podcast' && (
-        <div className="mb-6 space-y-4">
-          <div>
-            <label 
-              htmlFor="podcast-topic"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
-              Podcast Topic
-            </label>
-            <input
-              type="text"
-              id="podcast-topic"
-              value={podcastTopic}
-              onChange={(e) => setPodcastTopic(e.target.value)}
-              className="focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
-              placeholder="e.g., lead generation strategies"
-              aria-label="Podcast topic"
-            />
-          </div>
-          
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label 
               htmlFor="podcast-duration"
@@ -218,24 +165,43 @@ const HeygenScriptGenerator = () => {
             </div>
           </div>
           
-          <button
-            type="button"
-            onClick={generateNewContent}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            aria-label="Generate podcast content"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && generateNewContent()}
-          >
-            Generate Podcast Script
-          </button>
+          <div>
+            <label 
+              htmlFor="host-count"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Number of Hosts
+            </label>
+            <select
+              id="host-count"
+              value={hostCount}
+              onChange={(e) => setHostCount(parseInt(e.target.value))}
+              className="focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
+              aria-label="Number of hosts"
+            >
+              <option value={2}>2 Hosts</option>
+              <option value={3}>3 Hosts</option>
+            </select>
+          </div>
         </div>
-      )}
+        
+        <button
+          type="button"
+          onClick={generateNewContent}
+          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          aria-label="Generate podcast content"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && generateNewContent()}
+        >
+          Generate Podcast Script
+        </button>
+      </div>
       
       {/* Generated Content Display */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            {format === 'ai-script' ? 'Generated Script' : 'Podcast Script'}
+            Generated Podcast Script
           </label>
           <div className="flex space-x-2">
             <button
@@ -251,28 +217,48 @@ const HeygenScriptGenerator = () => {
             <button
               type="button"
               onClick={copyToClipboard}
-              className={`inline-flex items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-xs font-medium ${
-                isCopied 
-                  ? 'text-white bg-green-600 hover:bg-green-700 focus:ring-green-500' 
-                  : 'text-white bg-gray-600 hover:bg-gray-700 focus:ring-gray-500'
-              } focus:outline-none focus:ring-2 focus:ring-offset-2`}
-              aria-label="Copy content to clipboard"
+              className="inline-flex items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              aria-label="Copy to clipboard"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && copyToClipboard()}
             >
-              {isCopied ? 'Copied!' : 'Copy'}
+              {isCopied ? (
+                <>
+                  <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-8a2 2 0 00-2-2h-2.5"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2.5"></path>
+                  </svg>
+                  Copy
+                </>
+              )}
             </button>
           </div>
         </div>
-        <div className="mt-1 relative">
-          <textarea
-            rows={16}
-            readOnly
-            className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md p-4"
-            value={generatedContent}
-            aria-label="Generated content"
-          />
+        <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-md border border-gray-200 dark:border-gray-700 overflow-y-auto h-[400px]">
+          <pre className="whitespace-pre-wrap text-sm text-gray-600 dark:text-gray-300 font-mono">
+            {generatedContent}
+          </pre>
         </div>
+      </div>
+      
+      {/* Tips for Heygen Podcast Creation */}
+      <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-md">
+        <h3 className="font-medium text-blue-800 dark:text-blue-300 text-sm mb-2">Tips for HeyGen Podcast Creation</h3>
+        <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1 pl-4 list-disc">
+          <li>Maintain a conversational tone between hosts for natural dialogue</li>
+          <li>Include clear speaker labels for each line (HOST1, HOST2, etc.)</li>
+          <li>Structure your podcast with intro, main segments, and conclusion</li>
+          <li>Reference specific lead data insights to add credibility</li>
+          <li>Create transitions between topics for a smooth listening experience</li>
+          <li>Consider using different voices/avatars for each host in HeyGen</li>
+        </ul>
       </div>
     </div>
   );

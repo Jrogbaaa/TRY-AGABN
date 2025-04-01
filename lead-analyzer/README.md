@@ -7,8 +7,11 @@ A comprehensive tool for ingesting, analyzing, and deriving insights from lead d
 - **Data Ingestion**: Upload CSV or JSON lead data, or generate mock data for testing
 - **Data Analysis**: Statistical analysis of lead quality, conversion rates, and engagement metrics
 - **Visual Insights**: Rich visualizations showing lead sources, conversion timelines, and engagement patterns
-- **Script Generation**: Create personalized scripts for Heygen based on lead analysis
-- **Heygen Integration**: Direct integration with Heygen AI video platform for content creation
+- **Lead Scoring System**: Automated scoring mechanism based on engagement, content interaction, and conversion probability
+- **Optimal Outreach Timing**: Recommendations for the best times to contact leads based on activity patterns
+- **Outreach Templates**: Customizable email and LinkedIn templates tailored to lead interests
+- **Podcast Script Generation**: Create conversational scripts between multiple hosts for Heygen AI video podcasts
+- **Heygen Integration**: Direct integration with Heygen AI video and podcast creation tools
 - **Responsive Design**: Works seamlessly on both desktop and mobile devices
 - **Dark Mode Support**: Full dark mode with optimized UI elements including logo visibility
 
@@ -85,6 +88,46 @@ The application accepts JSON files with the following structure:
 ]
 ```
 
+## New Features in Latest Update
+
+### Lead Scoring System
+
+The Lead Scoring system provides a comprehensive evaluation of each lead based on multiple factors:
+
+- **Engagement Metrics**: Scores leads based on interaction history and responsiveness
+- **Content Interaction**: Evaluates how leads engage with both your content and external content
+- **Conversion Probability**: Factors in the likelihood of conversion based on lead characteristics
+- **Visual Indicators**: Star ratings and color-coded scores make high-value leads immediately identifiable
+- **Score Distribution**: Visual breakdown of scores across your lead database
+
+### Optimal Outreach Timing
+
+This feature helps you determine when to contact leads for maximum response rates:
+
+- **Weekly Calendar View**: Visual representation of the best times to contact each lead
+- **Lead-Specific Recommendations**: Customized timing suggestions based on individual lead activity patterns
+- **Confidence Ratings**: Each timing recommendation includes a confidence score
+- **Industry Best Practices**: Incorporates industry data to enhance timing recommendations
+
+### Outreach Templates
+
+Streamlines your lead communication with ready-to-use templates:
+
+- **Email Templates**: Professionally crafted email templates personalized for each lead
+- **LinkedIn Messages**: Complementary LinkedIn outreach templates
+- **Dynamic Personalization**: Templates automatically include lead-specific details such as name, interests, and optimal contact times
+- **Best Practices**: Guidelines for effective outreach based on lead data insights
+
+### Podcast Script Generation
+
+Enhanced to create natural, conversational content between multiple speakers:
+
+- **Multiple Format Options**: Choose between interview, discussion, or debate podcast formats
+- **Host Configuration**: Select 2-3 hosts/speakers for your podcast
+- **Topic Customization**: Generate scripts focused on specific topics relevant to your leads
+- **Duration Settings**: Adjust podcast length to fit your content needs
+- **Speaker Labels**: Clear speaker identification for easy implementation in Heygen
+
 ## Deployment
 
 This application is configured for Netlify deployment:
@@ -112,44 +155,35 @@ The application supports both light and dark modes, which can be toggled using t
 
 ## Heygen Integration
 
-[Heygen](https://www.heygen.com/) is an AI-powered video generation platform. The Lead Analyzer integrates with Heygen to help you create personalized outreach videos based on your lead data.
-
-### API Configuration
-
-The application comes with an API key pre-configured for connecting to the Heygen platform:
-```
-HEYGEN_API_KEY=MTAwYzgyZGNlMmE5NGZjNjk2MTIzZmRiMzhmYWUxODItMTczMzE0MDU4Nw==
-```
+[Heygen](https://www.heygen.com/) is an AI-powered video generation platform. The Lead Analyzer integrates with Heygen to help you create personalized outreach videos and podcasts based on your lead data.
 
 ### Using the Heygen Integration Tab
 
 1. Navigate to the "Heygen Integration" tab in the application
-2. Choose between two content formats:
-   - **AI-Recommended Script**: Generate a professional, data-driven script personalized for a specific lead or for general lead insights
-   - **Podcast Format**: Create a conversational podcast script discussing lead generation strategies with insights from your data
+2. Choose from multiple podcast formats:
+   - **Interview Style**: One host interviews an expert about lead insights
+   - **Discussion Format**: Multiple hosts discuss lead generation strategies and data findings
+   - **Debate Format**: Contrasting perspectives on lead generation approaches
 3. Customize your content settings:
-   - For AI scripts: Select a lead name for personalization (optional)
-   - For Podcast format: Specify topic and duration
-4. Copy the generated content using the Copy button
-5. Paste the script into Heygen's script editor to create your video
+   - Podcast topic
+   - Duration
+   - Number of hosts
+4. Copy the generated script using the Copy button
+5. Use the direct links to Heygen's tools:
+   - [Heygen Video Podcast](https://labs.heygen.com/video-podcast) for multi-speaker podcasts
+   - [Heygen Studio](https://www.heygen.com/studio) for traditional video creation
 
-### Script & Podcast Features
-
-- **AI Scripts**: Professional, data-driven scripts that highlight key insights from your lead data
-- **Podcast Format**: Creates a host/guest conversation with segments based on your lead analysis
-- **Personalization**: Option to customize content for specific leads
-- **Production Notes**: Helpful formatting for Heygen video creation
-
-### Creating Videos in Heygen
+### Creating Podcasts in Heygen
 
 To use the generated scripts with Heygen:
 
-1. Generate a script using one of the available formats
+1. Generate a podcast script using one of the available formats
 2. Copy the script using the copy button
-3. Visit [Heygen Studio](https://www.heygen.com/studio) and create a new project
-4. Paste the script into Heygen's script editor
-5. Select an avatar and customize voice settings
-6. Generate and download your video
+3. Visit [Heygen Video Podcast](https://labs.heygen.com/video-podcast)
+4. Paste the script into Heygen's editor
+5. Select avatars for each speaker (HOST1, HOST2, etc.)
+6. Customize voice settings for each speaker
+7. Generate and download your AI podcast
 
 ## License
 
@@ -161,4 +195,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Tailwind CSS for the utility-first CSS framework
 - Vite.js for the blazing fast build tool
 - Netlify for reliable hosting
-- Heygen for the AI video generation platform
+- Heygen for the AI video and podcast generation platform

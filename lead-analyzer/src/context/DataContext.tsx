@@ -18,6 +18,12 @@ export type Lead = {
   tags: string[];
   conversionProbability: number;
   estimatedValue: number;
+  score?: number;
+  optimalContactTimes?: {
+    day: string;
+    timeRange: string;
+    confidence: number;
+  }[];
 };
 
 // Define the context state type
@@ -34,6 +40,9 @@ type DataContextState = {
   getLeadsByTag: (tag: string) => Lead[];
   getMostCommonSource: () => { source: string; count: number };
   getConversionsByTimeFrame: (days: number) => { date: string; count: number }[];
+  calculateLeadScores: () => void;
+  getLeadsByScoreRange: (min: number, max: number) => Lead[];
+  getOptimalContactTimes: (leadId: string) => { day: string; timeRange: string; confidence: number }[] | undefined;
 };
 
 // Create the context with default values
@@ -151,6 +160,101 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     })).sort((a, b) => a.date.localeCompare(b.date));
   };
 
+  // Calculate scores for all leads based on engagement, conversion probability, and estimated value
+  const calculateLeadScores = () => {
+    const scoredLeads = leads.map(lead => {
+      // Calculate score based on multiple factors
+      const engagementScore = calculateEngagementScore(lead);
+      const valueScore = calculateValueScore(lead);
+      const conversionScore = lead.conversionProbability * 30; // Scale to roughly 0-30 range
+      
+      // Generate optimal contact times if not already present
+      const optimalContactTimes = lead.optimalContactTimes || generateOptimalContactTimes(lead);
+      
+      // Calculate final score (0-100 range)
+      const totalScore = Math.min(100, Math.round(engagementScore + valueScore + conversionScore));
+      
+      return { 
+        ...lead, 
+        score: totalScore,
+        optimalContactTimes
+      };
+    });
+    
+    setLeads(scoredLeads);
+  };
+  
+  // Helper function to calculate engagement score (0-40 range)
+  const calculateEngagementScore = (lead: Lead): number => {
+    const interactionCount = lead.interactionHistory.length;
+    const positiveInteractions = lead.interactionHistory.filter(
+      interaction => interaction.response === 'Positive'
+    ).length;
+    
+    // Calculate engagement from interaction history
+    const engagementBase = Math.min(20, interactionCount * 3);
+    const responsiveness = interactionCount > 0 
+      ? (positiveInteractions / interactionCount) * 20 
+      : 0;
+    
+    return Math.round(engagementBase + responsiveness);
+  };
+  
+  // Helper function to calculate value score (0-30 range)
+  const calculateValueScore = (lead: Lead): number => {
+    // Score based on estimated value (assumes most leads are between $0-50,000)
+    // Adjust this scale based on typical value range for your business
+    const valueScore = Math.min(30, (lead.estimatedValue / 50000) * 30);
+    return Math.round(valueScore);
+  };
+  
+  // Generate optimal contact times based on lead data
+  const generateOptimalContactTimes = (lead: Lead) => {
+    // This would ideally use actual interaction data patterns
+    // For now, generate some plausible times based on lead properties
+    
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const times = ['9:00 AM - 11:00 AM', '1:00 PM - 3:00 PM', '3:00 PM - 5:00 PM'];
+    
+    // Use lead properties to determine likely best days/times
+    // This is a simplified example - in reality would use more sophisticated analysis
+    const source = lead.source.toLowerCase();
+    let preferredDays: string[] = [];
+    
+    if (source.includes('linkedin')) {
+      preferredDays = ['Tuesday', 'Thursday'];
+    } else if (source.includes('email') || source.includes('newsletter')) {
+      preferredDays = ['Monday', 'Wednesday', 'Friday'];
+    } else {
+      // Select 2-3 random days if no specific pattern
+      preferredDays = days.sort(() => 0.5 - Math.random()).slice(0, 2 + Math.floor(Math.random() * 2));
+    }
+    
+    // Generate 2-3 optimal contact windows
+    return preferredDays.map(day => {
+      const randomTimeIndex = Math.floor(Math.random() * times.length);
+      return {
+        day,
+        timeRange: times[randomTimeIndex],
+        confidence: 70 + Math.floor(Math.random() * 20) // 70-90% confidence
+      };
+    });
+  };
+
+  // Filter leads by score range
+  const getLeadsByScoreRange = (min: number, max: number) => {
+    return leads.filter(lead => {
+      if (!lead.score) return false;
+      return lead.score >= min && lead.score <= max;
+    });
+  };
+  
+  // Get optimal contact times for a specific lead
+  const getOptimalContactTimes = (leadId: string) => {
+    const lead = leads.find(lead => lead.id === leadId);
+    return lead?.optimalContactTimes;
+  };
+
   const value = {
     leads,
     isLoading,
@@ -163,7 +267,10 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     getAverageConversionProbability,
     getLeadsByTag,
     getMostCommonSource,
-    getConversionsByTimeFrame
+    getConversionsByTimeFrame,
+    calculateLeadScores,
+    getLeadsByScoreRange,
+    getOptimalContactTimes
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
