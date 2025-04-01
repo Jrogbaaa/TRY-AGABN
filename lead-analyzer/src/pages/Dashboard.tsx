@@ -56,7 +56,7 @@ const Dashboard = () => {
         </p>
         <a 
           href="/data-input" 
-          className="inline-flex items-center px-5 py-2.5 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150"
+          className="btn-primary"
           aria-label="Go to data input page"
           tabIndex={0}
         >
@@ -73,7 +73,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 flex justify-between items-center">
+      <div className="card p-6 mb-6 flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Lead Dashboard</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">

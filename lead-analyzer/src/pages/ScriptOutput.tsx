@@ -7,18 +7,20 @@ const ScriptOutput = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="card p-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Script Generator</h1>
         {leads.length > 0 && (
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            Using data from {leads.length} leads
+          <div className="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30 px-4 py-2 rounded-full">
+            <span className="text-blue-800 dark:text-blue-200 font-medium">
+              Using data from {leads.length} leads
+            </span>
           </div>
         )}
       </div>
 
       {/* No data state */}
       {!leads || leads.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">
+        <div className="card p-8 text-center">
           <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
           </svg>
@@ -28,7 +30,7 @@ const ScriptOutput = () => {
           </p>
           <a 
             href="/data-input" 
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="btn-primary"
             aria-label="Go to data input page"
             tabIndex={0}
           >
@@ -41,7 +43,7 @@ const ScriptOutput = () => {
           <ScriptGenerator />
 
           {/* Heygen Info */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="card p-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">About Heygen</h2>
             
             <div className="prose dark:prose-invert max-w-none">
