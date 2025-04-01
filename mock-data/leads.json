@@ -1,0 +1,222 @@
+[
+  {
+    "id": "lead-001",
+    "name": "John Smith",
+    "email": "john@example.com",
+    "source": "LinkedIn",
+    "initialContact": "2023-12-15T14:25:00Z",
+    "status": "Qualified",
+    "interactionHistory": [
+      {
+        "date": "2023-12-15T14:30:00Z",
+        "type": "Email",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-18T10:15:00Z",
+        "type": "Call",
+        "response": "Interested"
+      }
+    ],
+    "tags": ["enterprise", "high-value", "marketing"],
+    "conversionProbability": 0.75,
+    "estimatedValue": 15000
+  },
+  {
+    "id": "lead-002",
+    "name": "Emily Johnson",
+    "email": "emily@company.org",
+    "source": "Website",
+    "initialContact": "2023-12-10T09:15:00Z",
+    "status": "Contacted",
+    "interactionHistory": [
+      {
+        "date": "2023-12-10T09:30:00Z",
+        "type": "Email",
+        "response": "Neutral"
+      }
+    ],
+    "tags": ["small-business", "technology"],
+    "conversionProbability": 0.4,
+    "estimatedValue": 5000
+  },
+  {
+    "id": "lead-003",
+    "name": "Michael Wong",
+    "email": "michael@bigcorp.com",
+    "source": "Referral",
+    "initialContact": "2023-12-05T13:45:00Z",
+    "status": "Converted",
+    "interactionHistory": [
+      {
+        "date": "2023-12-05T14:00:00Z",
+        "type": "Call",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-07T11:30:00Z",
+        "type": "Meeting",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-12T15:00:00Z",
+        "type": "Email",
+        "response": "Converted"
+      }
+    ],
+    "tags": ["enterprise", "finance", "high-value"],
+    "conversionProbability": 1.0,
+    "estimatedValue": 25000
+  },
+  {
+    "id": "lead-004",
+    "name": "Sarah Miller",
+    "email": "sarah@startupinc.io",
+    "source": "Conference",
+    "initialContact": "2023-12-08T16:20:00Z",
+    "status": "Qualified",
+    "interactionHistory": [
+      {
+        "date": "2023-12-08T16:30:00Z",
+        "type": "InPerson",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-11T09:45:00Z",
+        "type": "Email",
+        "response": "Interested"
+      }
+    ],
+    "tags": ["startup", "technology", "growth"],
+    "conversionProbability": 0.6,
+    "estimatedValue": 10000
+  },
+  {
+    "id": "lead-005",
+    "name": "Robert Chen",
+    "email": "robert@techinnovators.com",
+    "source": "LinkedIn",
+    "initialContact": "2023-12-18T11:05:00Z",
+    "status": "New",
+    "interactionHistory": [
+      {
+        "date": "2023-12-18T11:10:00Z",
+        "type": "Email",
+        "response": "Neutral"
+      }
+    ],
+    "tags": ["enterprise", "technology"],
+    "conversionProbability": 0.3,
+    "estimatedValue": 12000
+  },
+  {
+    "id": "lead-006",
+    "name": "Jessica Taylor",
+    "email": "jessica@marketingpros.net",
+    "source": "Webinar",
+    "initialContact": "2023-12-13T13:15:00Z",
+    "status": "Disqualified",
+    "interactionHistory": [
+      {
+        "date": "2023-12-13T13:30:00Z",
+        "type": "Email",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-14T14:00:00Z",
+        "type": "Call",
+        "response": "Negative"
+      }
+    ],
+    "tags": ["agency", "marketing"],
+    "conversionProbability": 0.1,
+    "estimatedValue": 4000
+  },
+  {
+    "id": "lead-007",
+    "name": "David Wilson",
+    "email": "david@retailgroup.com",
+    "source": "Advertisement",
+    "initialContact": "2023-12-16T09:40:00Z",
+    "status": "New",
+    "interactionHistory": [
+      {
+        "date": "2023-12-16T10:00:00Z",
+        "type": "Email",
+        "response": "Neutral"
+      }
+    ],
+    "tags": ["mid-size", "retail"],
+    "conversionProbability": 0.25,
+    "estimatedValue": 8000
+  },
+  {
+    "id": "lead-008",
+    "name": "Amanda Rodriguez",
+    "email": "amanda@healthtech.io",
+    "source": "Website",
+    "initialContact": "2023-12-07T15:30:00Z",
+    "status": "Qualified",
+    "interactionHistory": [
+      {
+        "date": "2023-12-07T15:45:00Z",
+        "type": "Email",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-09T11:00:00Z",
+        "type": "Call",
+        "response": "Interested"
+      },
+      {
+        "date": "2023-12-15T13:00:00Z",
+        "type": "Demo",
+        "response": "Positive"
+      }
+    ],
+    "tags": ["healthcare", "technology", "mid-size"],
+    "conversionProbability": 0.8,
+    "estimatedValue": 18000
+  },
+  {
+    "id": "lead-009",
+    "name": "Thomas Brown",
+    "email": "thomas@eduplatform.edu",
+    "source": "Referral",
+    "initialContact": "2023-12-12T10:20:00Z",
+    "status": "Contacted",
+    "interactionHistory": [
+      {
+        "date": "2023-12-12T10:30:00Z",
+        "type": "Email",
+        "response": "Positive"
+      },
+      {
+        "date": "2023-12-14T09:00:00Z",
+        "type": "Call",
+        "response": "Neutral"
+      }
+    ],
+    "tags": ["education", "non-profit"],
+    "conversionProbability": 0.5,
+    "estimatedValue": 7000
+  },
+  {
+    "id": "lead-010",
+    "name": "Lisa Garcia",
+    "email": "lisa@fashionbrand.com",
+    "source": "Instagram",
+    "initialContact": "2023-12-17T12:10:00Z",
+    "status": "New",
+    "interactionHistory": [
+      {
+        "date": "2023-12-17T12:30:00Z",
+        "type": "Email",
+        "response": "Positive"
+      }
+    ],
+    "tags": ["retail", "small-business", "e-commerce"],
+    "conversionProbability": 0.35,
+    "estimatedValue": 6000
+  }
+] 
