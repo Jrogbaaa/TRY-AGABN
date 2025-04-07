@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useData } from '../context/DataContext';
-import InsightsPanel from '../components/InsightsPanel';
 import LeadScoring from '../components/LeadScoring';
 import OptimalOutreachTiming from '../components/OptimalOutreachTiming';
 import { useDataAnalysis } from '../hooks/useDataAnalysis';
@@ -18,7 +17,7 @@ const Dashboard = () => {
     if (leads && leads.length > 0) {
       calculateLeadScores();
     }
-  }, [leads]);
+  }, [leads, calculateLeadScores]);
 
   // Loading state
   if (isLoading) {
@@ -96,11 +95,8 @@ const Dashboard = () => {
 
       {/* Lead Scoring */}
       <LeadScoring />
-
-      {/* Insights Panel - Score distribution */}
-      <InsightsPanel leads={leads} />
-
-      {/* Optimal Outreach Timing - Calendar */}
+      
+      {/* Content Calendar */}
       <OptimalOutreachTiming />
     </div>
   );
