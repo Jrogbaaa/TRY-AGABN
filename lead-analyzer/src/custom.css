@@ -39,8 +39,9 @@
 }
 
 /* Dark mode logo styles */
-.dark img[src="/logo.png"] {
-  filter: brightness(0) invert(1);
+.dark img[src="/images/orig-backup/logo.svg"] {
+  /* We don't need filters here as the SVG already has a dark background */
+  filter: none;
 }
 
 /* Smooth transitions */
