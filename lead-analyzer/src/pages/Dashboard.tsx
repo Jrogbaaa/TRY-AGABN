@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import InsightsPanel from '../components/InsightsPanel';
-import LeadsBySource from '../components/visualizations/LeadsBySource';
-import ConversionTimeline from '../components/visualizations/ConversionTimeline';
-import EngagementMetrics from '../components/visualizations/EngagementMetrics';
 import LeadScoring from '../components/LeadScoring';
 import OptimalOutreachTiming from '../components/OptimalOutreachTiming';
-import OutreachTemplates from '../components/OutreachTemplates';
 import { useDataAnalysis } from '../hooks/useDataAnalysis';
 
 const Dashboard = () => {
@@ -101,22 +97,11 @@ const Dashboard = () => {
       {/* Lead Scoring */}
       <LeadScoring />
 
-      {/* Insights Panel */}
+      {/* Insights Panel - Score distribution */}
       <InsightsPanel leads={leads} />
 
-      {/* Visualizations */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <LeadsBySource data={sourceBreakdown} />
-        <ConversionTimeline data={conversionTimeline} />
-      </div>
-
-      <EngagementMetrics data={engagementMetrics} />
-
-      {/* Optimal Outreach Timing */}
+      {/* Optimal Outreach Timing - Calendar */}
       <OptimalOutreachTiming />
-
-      {/* Outreach Templates */}
-      <OutreachTemplates />
     </div>
   );
 };
