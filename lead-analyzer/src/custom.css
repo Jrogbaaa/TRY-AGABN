@@ -39,9 +39,9 @@
 }
 
 /* Dark mode logo styles */
-.dark img[src="/images/orig-backup/logo.svg"] {
-  /* We don't need filters here as the SVG already has a dark background */
-  filter: none;
+.dark img[src="/images/props_logo.png"] {
+  /* Invert colors for the black PROPS logo in dark mode */
+  filter: invert(1) brightness(1.5);
 }
 
 /* Smooth transitions */
