@@ -1,0 +1,9 @@
+Please place your logo image file in this directory with the name "logo.png".
+It should be a PNG format image with transparent background for best results.
+The recommended size is around 240x80 pixels to match the SVG dimensions.
+
+The app has been configured to look for the logo at "/logo.png" in the root public directory.
+
+If you have the image ready, you can:
+1. Copy it to the public directory and name it "logo.png"
+2. The site will then display your actual logo image instead of the SVG text version. 
