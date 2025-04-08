@@ -7,13 +7,11 @@ const DataInput = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="card p-6 flex justify-between items-center">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Data Input</h1>
         {leads.length > 0 && (
-          <div className="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30 px-4 py-2 rounded-full">
-            <span className="text-blue-800 dark:text-blue-200 font-medium">
-              Current dataset: {leads.length} leads
-            </span>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Current dataset: {leads.length} leads
           </div>
         )}
       </div>
@@ -22,7 +20,7 @@ const DataInput = () => {
       <DataUploader />
 
       {/* Format Instructions */}
-      <div className="card p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Data Format Guidelines</h2>
         
         <div className="space-y-6">
