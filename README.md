@@ -10,6 +10,20 @@ A comprehensive tool for ingesting, analyzing, and deriving insights from lead d
 - **Script Generation**: Create personalized scripts for Heygen based on lead analysis
 - **Heygen Integration**: Easy-to-follow integration with Heygen AI video platform
 - **Responsive Design**: Works seamlessly on both desktop and mobile devices
+- **Modern UI**: Sleek design with gradients, animations, and dark mode support
+- **Accessibility**: Fully accessible components with proper ARIA attributes and keyboard navigation
+
+## Recently Updated UI
+
+The application has been redesigned with a modern UI featuring:
+
+- **Gradient Backgrounds**: Subtle gradient overlays for a more engaging visual experience
+- **Improved Card Design**: Rounded corners, shadows, and hover effects for better interaction
+- **Dark Mode Support**: Full dark mode with optimized UI elements
+- **Micro-animations**: Subtle animations for better user feedback
+- **Better Visual Hierarchy**: Improved typography and spacing for better readability
+- **Enhanced Input Controls**: More intuitive form elements with better visual feedback
+- **Accessibility Improvements**: Better contrast ratios and keyboard navigation
 
 ## Technology Stack
 
@@ -89,6 +103,17 @@ The application accepts JSON files with the following structure:
 The application is configured for GitHub Pages deployment. Simply push to the main branch, and the GitHub Actions workflow will handle the deployment automatically.
 
 You can customize the deployment settings in `.github/workflows/deploy.yml` and `vite.config.ts`.
+
+## UI Customization
+
+### Dark Mode
+
+The application supports both light and dark modes, which can be toggled using the button in the bottom-left corner of the navigation menu. When in dark mode:
+
+- The interface switches to a darker color palette
+- UI elements adapt with proper contrast
+- Charts and visualizations maintain readability
+- All UI elements maintain accessibility standards
 
 ## Heygen Integration
 
