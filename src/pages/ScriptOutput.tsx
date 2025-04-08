@@ -8,7 +8,7 @@ const ScriptOutput = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Script Generator</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Outreach</h1>
         {leads.length > 0 && (
           <div className="text-sm text-gray-500 dark:text-gray-400">
             Using data from {leads.length} leads
@@ -24,7 +24,7 @@ const ScriptOutput = () => {
           </svg>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Lead Data Available</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            To generate scripts for Heygen, you need to first upload lead data or generate demo data from the Data Input page.
+            To generate personalized outreach scripts, you need to first upload lead data or generate demo data from the Data Input page.
           </p>
           <a 
             href="/data-input" 

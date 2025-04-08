@@ -39,7 +39,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       )
     },
     {
-      name: 'Script Generator',
+      name: 'Outreach',
       href: '/script-output',
       icon: (active) => (
         <svg className={`w-6 h-6 ${active ? 'text-blue-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
