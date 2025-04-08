@@ -1,6 +1,6 @@
 [build]
-  command = "cd lead-analyzer && npm install && npm run build"
-  publish = "lead-analyzer/dist"
+  command = "npm run build-netlify"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
